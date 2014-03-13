@@ -4,9 +4,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class MiInput extends InputListener{
+	Pelotita p;
+	MiInput(Pelotita param)
+	{
+		super();
+		p=param;
+	}
+	
 	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
 	{
-		System.out.println("pelotita presionada");
+		System.out.println(Math.random()*1000%100);
+		p.remove();
 		return true;
 	}
 }

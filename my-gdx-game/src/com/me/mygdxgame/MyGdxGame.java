@@ -95,7 +95,7 @@ public class MyGdxGame implements ApplicationListener {
 		
 		for(int i=0;i<5;i++)
 		{
-			Pelotita p=new Pelotita();
+			Pelotita p=new Pelotita((int)(Math.random()*1000%w),(int)(Math.random()*1000%h));
 			s.addActor(p);
 			pelotitas.add(p);
 		}
@@ -121,12 +121,6 @@ public class MyGdxGame implements ApplicationListener {
 		
 		s.draw();
 		s.act();
-		
-		for(int i=0;i<5;i++)
-		{
-			Pelotita p = pelotitas.get(i);
-			p.setX(p.getX()+1);
-		}
 	}
 
 	@Override
