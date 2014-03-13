@@ -8,5 +8,11 @@ public class Pelotita extends Image{
 		super(new Texture("data/pelotita.png"));
 		this.addListener(new MiInput());
 	}
+	
+	@Override
+	public void act(float delta)
+	{
+		setX(getX()+10);
+	}
 
 }

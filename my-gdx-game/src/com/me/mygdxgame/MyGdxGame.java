@@ -41,7 +41,7 @@ public class MyGdxGame implements ApplicationListener {
 	private Sprite sprite_nave;
 	private Imagen imagen;
 	private Image i;
-	Pelotita p;
+	ArrayList<Pelotita> pelotitas=new ArrayList<Pelotita>();
 	Stage s;
 	ArrayList<Sprite>sprites=new ArrayList<Sprite>();
 	
@@ -93,8 +93,12 @@ public class MyGdxGame implements ApplicationListener {
 			sprites.get(i).setSize(1, 1);
 		}
 		
-		p=new Pelotita();
-		s.addActor(p);
+		for(int i=0;i<5;i++)
+		{
+			Pelotita p=new Pelotita();
+			s.addActor(p);
+			pelotitas.add(p);
+		}
 		Gdx.input.setInputProcessor(s);
 		
 	}
@@ -116,7 +120,13 @@ public class MyGdxGame implements ApplicationListener {
 		batch.setProjectionMatrix(camera.combined);
 		
 		s.draw();
-		//p.setX(p.getX()+1);
+		s.act();
+		
+		for(int i=0;i<5;i++)
+		{
+			Pelotita p = pelotitas.get(i);
+			p.setX(p.getX()+1);
+		}
 	}
 
 	@Override
