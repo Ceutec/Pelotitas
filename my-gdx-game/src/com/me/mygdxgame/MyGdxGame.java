@@ -41,11 +41,13 @@ public class MyGdxGame implements ApplicationListener {
 	private Sprite sprite_nave;
 	private Imagen imagen;
 	private Image i;
+	Pelotita p;
 	ArrayList<Pelotita> pelotitas=new ArrayList<Pelotita>();
 	Stage s;
 	ArrayList<Sprite>sprites=new ArrayList<Sprite>();
 	
 	int rotacion=0;
+	int frame=0;
 	
 	@Override
 	public void create()
@@ -56,7 +58,7 @@ public class MyGdxGame implements ApplicationListener {
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
 		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
+		texture = new Texture(Gdx.files.internal("data/FondoA.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
@@ -71,8 +73,8 @@ public class MyGdxGame implements ApplicationListener {
 		sprite.setRotation(25);
 		
 		
-		texture_nave = new Texture(Gdx.files.internal("data/nave.png"));
-		sprite_nave=new Sprite(texture_nave,128,64);
+		texture_nave = new Texture(Gdx.files.internal("data/heartblack.png"));
+		sprite_nave=new Sprite(texture_nave,64,64);
 		sprite_nave.setPosition(-0.5f,-0.5f);
 		sprite_nave.setSize(0.5f, 0.50f);
 		
@@ -93,13 +95,24 @@ public class MyGdxGame implements ApplicationListener {
 			sprites.get(i).setSize(1, 1);
 		}
 		
-		for(int i=0;i<5;i++)
+		for(int i=0;i<20;i++)
 		{
-			Pelotita p=new Pelotita((int)(Math.random()*1000%w),(int)(Math.random()*1000%h));
+			Pelotita p=new Pelotita((int)(Math.random()*1000%w),(int)(Math.random()*1000%h),new Texture("data/corazon.png"));
+			
 			s.addActor(p);
 			pelotitas.add(p);
 		}
 		Gdx.input.setInputProcessor(s);
+		
+		
+		for(int i=0;i<5;i++)
+		{
+			PelotitaMala p=new PelotitaMala((int)(Math.random()*1000%w),(int)(Math.random()*1000%h));
+			s.addActor(p);
+			pelotitas.add(p);
+		}
+		Gdx.input.setInputProcessor(s);
+		
 		
 	}
 
@@ -114,7 +127,11 @@ public class MyGdxGame implements ApplicationListener {
 		sprite.setRotation(rotacion);
 		imagen.avanzar();
 		
-		Gdx.gl.glClearColor(1, 0, 1, 1);
+		/*if (frame%100==0){
+		s.addActor(new Pelotita(0,0));
+		frame++;}/*/
+		
+		Gdx.gl.glClearColor(6.14f, 3.5f, 4.55f, 6);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(camera.combined);
